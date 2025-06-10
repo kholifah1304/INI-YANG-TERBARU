@@ -53,6 +53,7 @@ $pembelian = [
         </tbody>
     </table>
 
-    <button class="back-btn">Back</button>
+    <!-- Tombol Back -->
+    <button class="back-btn" onclick="history.back();">Back</button>
 </body>
 </html>

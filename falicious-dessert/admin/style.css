@@ -14,7 +14,7 @@ body {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background-color: #7A5438;
+  background-color: #7A5438; /* Coklat tua */
   color: #fff;
   min-height: 100vh;
 }
@@ -43,12 +43,34 @@ body {
   transition: 0.3s;
 }
 
-.sidebar ul li.active,
+/* Default link */
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+/* Hover state */
 .sidebar ul li:hover {
-  background-color: #f3e7d8;
-  color: #333;
+  background-color: #ffffff;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.sidebar ul li:hover a {
+  color: #333;
+}
+
+/* Active state */
+.sidebar ul li.active {
+  background-color: #ffffff;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebar ul li.active a {
+  color: #333;
+  font-weight: bold;
 }
 
 /* Main Content */

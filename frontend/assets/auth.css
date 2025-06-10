@@ -1,0 +1,102 @@
+/* LOG IN DAN SIGN UP ---------------------------------------------------------------------------------------*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('../assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: start;
+    padding-left: 5rem;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 65px;
+    width: auto;
+}
+
+.back-button {
+    font-size: 15px;
+    text-decoration: none;
+    color: #333;
+    padding: 0.1rem 0.5rem;
+    border: solid black 2px;
+    border-radius: 100%;
+    margin-bottom: 5rem;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input:focus {
+    border-color: #b57b57;
+    outline: none;
+}
+
+.login-button {
+    padding: 10px;
+    background-color: #b57b57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #a66b5a;
+}
+
+.sign-up {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.sign-up a {
+    color: #b57b57;
+    text-decoration: none;
+}

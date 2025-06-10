@@ -25,6 +25,13 @@ h2 {
     color: white;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #6f472c;
 }
 
 table {
@@ -52,16 +59,32 @@ tr:nth-child(even) {
     border-radius: 5px;
 }
 
+/* Tombol seragam */
 button.delete-btn,
 button.bukti-btn,
-button.back-btn {
+button.back-btn,
+a.back-btn,
+a.delete-btn,
+a.bukti-btn {
     background-color: #8B5E3C;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+button.delete-btn:hover,
+button.bukti-btn:hover,
+button.back-btn:hover,
+a.back-btn:hover,
+a.delete-btn:hover,
+a.bukti-btn:hover {
+    background-color: #6f472c;
 }
 
 button.back-btn {

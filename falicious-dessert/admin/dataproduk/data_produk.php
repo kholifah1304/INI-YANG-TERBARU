@@ -11,7 +11,7 @@
     <h1>Data Produk</h1>
     <div class="top-bar">
       <input type="text" placeholder="Cari Data..." class="search-input" />
-      <button class="input-btn">Input Produk</button>
+      <a href="form.php" class="input-btn">Input Produk</a>
     </div>
     <table>
       <thead>
@@ -52,15 +52,15 @@
                   <td>{$item[2]}</td>
                   <td>{$item[3]}</td>
                   <td>
-                    <button class='edit'>Edit</button>
-                    <button class='delete'>Delete</button>
+                    <a href='edit.php?id={$id}' class='edit'>Edit</a>
+                    <a href='index.php?id={$id}' class='delete' onclick='return confirm(\"Yakin ingin menghapus produk ini?\")'>Delete</a>
                   </td>
                 </tr>";
         }
         ?>
       </tbody>
     </table>
-    <button class="back-btn">Back</button>
+    <button class="back-btn" onclick="history.back()">Back</button>
   </div>
 </body>
 </html>

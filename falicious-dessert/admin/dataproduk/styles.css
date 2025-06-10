@@ -31,12 +31,19 @@ h1 {
 }
 
 .input-btn {
-  background-color: #836049;
-  color: white;
+  background-color: #7A5438;
+  color: #fff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-btn:hover {
+  background-color: #5d3e2b;
 }
 
 table {

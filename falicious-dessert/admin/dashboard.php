@@ -19,7 +19,7 @@ $total_pendapatan = 0;
         <img src="logo_dessert-removebg-preview.png" alt="logo">
         </div>
     <ul>
-      <li class="active">Dashboard</li>
+      <li class="active"><a href="#">Dashboard</a></li>
       <li><a href="dataproduk/data_produk.php">Data Produk</a></li>
       <li><a href="datapemesanan/pemesanan_produk.php">Pemesanan</a></li>
       <li><a href="datapembelian/pembelian.php">Pembelian</a></li>
