@@ -1,5 +1,5 @@
 <?php
-    include "../koneksi.php";
+    include "../../koneksi.php";
 
     if (isset($_COOKIE['id_user'])) {
         $id_user = $_COOKIE['id_user'];
@@ -48,9 +48,22 @@ $result = mysqli_query($koneksi, $query);
                 <input type="text" placeholder="search product...">
             </div>
             <div class="icons">
-                <a href="http://localhost/app_dessert/frontend/pages/order/keranjang.php"><span class="icon-cart">🛒</span></a>
-                <a href="http://localhost/app_dessert/frontend/pages/auth/login.php"><span class="icon-user">👤</span></a>
+    <div class="user-icon-container">
+        <a href="#" class="icon-user" id="userIcon">👤</a>
+        <div class="user-popup" id="userPopup">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Nama User</span>
+                    <span class="user-email" id="userEmail">user@example.com</span>
+                </div>
             </div>
+            <div class="popup-actions">
+                <a href="http://localhost/app_dessert/frontend/pages/auth/logout.php" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
         </div>
     </header>
 
@@ -95,11 +108,11 @@ $result = mysqli_query($koneksi, $query);
         </div>
     </section>
 
-    <div class="line">
+    <!-- <div class="line">
         <p>PESAN</p>
         <hr>
-    </div>
-
+    </div> -->
+<!-- 
     <section class="contact-form">
         <img src="http://localhost/app_dessert/frontend/assets/stobeligrape.png" class="fruit top-left" alt="">
         <img src="http://localhost/app_dessert/frontend/assets/mango.png" class="fruit bottom-right" alt="">
@@ -118,7 +131,58 @@ $result = mysqli_query($koneksi, $query);
 
             <button type="submit">Kirim Pesan</button>
         </form>
-    </section>
+    </section> -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const userIcon = document.getElementById('userIcon');
+    const userPopup = document.getElementById('userPopup');
+    
+    // Tampilkan popup saat ikon user diklik
+    userIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        userPopup.style.display = userPopup.style.display === 'block' ? 'none' : 'block';
+        
+        // Jika user sudah login, ambil data user
+        if (document.cookie.includes('id_user') && !userPopup.dataset.loaded) {
+            fetchUserData();
+        }
+    });
+    
+    // Sembunyikan popup saat klik di luar
+    document.addEventListener('click', function(e) {
+        if (!userPopup.contains(e.target) && e.target !== userIcon) {
+            userPopup.style.display = 'none';
+        }
+    });
+    
+    // Fungsi untuk mengambil data user
+    function fetchUserData() {
+        fetch('http://localhost/app_dessert/frontend/pages/auth/get-user-data.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('userName').textContent = data.name || 'User';
+                    document.getElementById('userEmail').textContent = data.email || '';
+                    userPopup.dataset.loaded = true;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    }
+    
+    // Periksa status login saat halaman dimuat
+    if (document.cookie.includes('id_user')) {
+        fetchUserData();
+    } else {
+        // Jika belum login, ubah ikon user menjadi link ke login
+        userIcon.href = 'http://localhost/app_dessert/frontend/pages/auth/login.php';
+        userIcon.onclick = null;
+    }
+});
+
+</script>
 
     <footer>
         <div class="footer-container">

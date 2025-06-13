@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../../koneksi.php"; // Sesuaikan path ke file koneksi Anda
+include "../../../koneksi.php"; // Sesuaikan path ke file koneksi Anda
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];

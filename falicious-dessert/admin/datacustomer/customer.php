@@ -40,7 +40,7 @@ $result = $conn->query($query);
         <?php while($row = $result->fetch_assoc()): ?>
         <tr>
             <td><?= $row['id_user'] ?></td>
-            <td><?= $row['nama'] ?></td>
+            <td><?= $row['username'] ?></td>
             <td><?= $row['email'] ?></td>
             <td><?= $row['no_telp'] ?></td>
             <td><?= $row['alamat'] ?></td>

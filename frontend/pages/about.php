@@ -32,7 +32,6 @@
                 <input type="text" placeholder="search product...">
             </div>
             <div class="icons">
-                <a href="http://localhost/app_dessert/frontend/pages/order/keranjang.php"><span class="icon-cart">🛒</span></a>
                 <a href="http://localhost/app_dessert/frontend/pages/auth/login.php"><span class="icon-user">👤</span></a>
             </div>
         </div>

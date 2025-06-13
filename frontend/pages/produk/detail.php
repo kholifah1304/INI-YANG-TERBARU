@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../../koneksi.php";
+include "../../../koneksi.php";
 
 if (isset($_COOKIE['id_user'])) {
     $id_user = $_COOKIE['id_user'];
@@ -83,17 +83,8 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
         </div>
     </header>
 
-    <section class="product-detail">
-        <div class="popup-notification" id="popup">
-            <h3>Produk berhasil ditambahkan di keranjang!</h3>
-            <p><strong id="popup-product-name"><?= htmlspecialchars($product['nama_produk']) ?></strong></p>
-            <p>Apa yang ingin anda lakukan selanjutnya?</p>
-            <div class="popup-buttons">
-                <button onclick="closePopup()">Lanjut Belanja</button>
-                <a href="http://localhost/app_dessert/frontend/pages/order/keranjang.php"><button>Lihat Keranjang</button></a>
-            </div>
-        </div>
-
+   <section class="product-detail">
+   
         <div class="product-detail-container">
             <div class="product-image">
                 <img src="http://localhost/app_dessert/frontend/assets/<?= htmlspecialchars($product['foto_produk']) ?>" alt="<?= htmlspecialchars($product['nama_produk']) ?>">
@@ -121,7 +112,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
                 </div>
 
                 <div class="product-buttons">
-                    <button class="add-to-cart" data-product-id="<?= $product['id_produk'] ?>">Add To Cart</button>
+                    <!-- <button class="add-to-cart" data-product-id="<?= $product['id_produk'] ?>">Add To Cart</button> -->
                         <a href="http://localhost/app_dessert/frontend/pages/order/pemesanan.php?product_id=<?= $product['id_produk'] ?>&quantity=1" id="buy-now-button">
         <button class="buy-now">Buy Now</button>
     </a>
@@ -157,7 +148,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
         <button class="geser-kanan">→</button>
     </div>
 
-    <script>
+    <!-- <script>
           document.querySelector('.qty-minus').addEventListener('click', function() {
         const quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value);
@@ -231,7 +222,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
         tombolKiri.addEventListener('click', () => {
             container.scrollBy({ left: -400, behavior: 'smooth' });
         });
-    </script>
+    </script> -->
 
     <footer>
         <div class="footer-container">

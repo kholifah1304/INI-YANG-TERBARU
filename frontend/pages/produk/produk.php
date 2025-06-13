@@ -1,5 +1,5 @@
 <?php
-    include "../../koneksi.php";
+    include "../../../koneksi.php";
 
     if (isset($_COOKIE['id_user'])) {
         $id_user = $_COOKIE['id_user'];
@@ -57,7 +57,7 @@
                 <input type="text" placeholder="search product...">
             </div>
             <div class="icons">
-                <a href="http://localhost/app_dessert/frontend/pages/order/keranjang.php"><span class="icon-cart">🛒</span></a>
+
                 <a href="http://localhost/app_dessert/frontend/pages/auth/login.php"><span class="icon-user">👤</span></a>
             </div>
         </div>

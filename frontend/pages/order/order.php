@@ -1,8 +1,7 @@
 <?php
 session_start();
-include "../../koneksi.php";  // path sesuai letak file
+include "../../../koneksi.php";  // path sesuai letak file
 $id_user = $_COOKIE['id_user'] ?? null;
-
 
 if (!$id_user) {
     echo "User belum login";
@@ -10,8 +9,8 @@ if (!$id_user) {
 }
 
 // Ambil data pesanan user
-$sql = "SELECT p.tanggal_pesanan, peng.alamat_tujuan, pm.nama_metode, pr.nama_produk, k.quantity, p.status, p.bukti_pembayaran, 
-        (pr.harga * k.quantity) AS total
+$sql = "SELECT p.id_pesanan, p.tanggal_pesanan, peng.alamat_tujuan, pm.nama_metode, pr.nama_produk, k.quantity, p.status, p.bukti_pembayaran, 
+        k.total AS total_keranjang
         FROM pesanan p
         JOIN keranjang k ON p.id_keranjang = k.id_keranjang
         JOIN produk pr ON k.id_produk = pr.id_produk
@@ -35,8 +34,8 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KERANJANG</title>
-    <link rel="stylesheet" href="http://localhost/app_dessert/frontend/assets/style.css"> <!-- PERBAIKAN PATH -->
+    <title>Order | SLDessert</title>
+    <link rel="stylesheet" href="http://localhost/app_dessert/frontend/assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
 </head>
@@ -64,48 +63,49 @@ $result = $stmt->get_result();
                 <input type="text" placeholder="search product...">
             </div>
             <div class="icons">
-                <a href="http://localhost/app_dessert/frontend/pages/order/keranjang.php"><span class="icon-cart">🛒</span></a>
                 <a href="http://localhost/app_dessert/frontend/pages/auth/login.php"><span class="icon-user">👤</span></a>
             </div>
         </div>
     </header>
-    
+
     <section class="order-section">
-    <div class="order-overlay">
-        <h2>Order/Pesanan</h2>
-        <p>Pilih varian favoritmu dan pesan sekarang juga! <br> Jangan sampai kehabisan!</p>
-    </div>
+        <div class="order-overlay">
+            <h2>Order/Pesanan</h2>
+            <p>Pilih varian favoritmu dan pesan sekarang juga! <br> Jangan sampai kehabisan!</p>
+        </div>
     </section>
 
-        <section class="order-list">
-    <h2>Daftar Pesanan</h2>
+    <section class="order-list">
+        <h2>Daftar Pesanan</h2>
 
-    <div style="display: grid; grid-template-columns: auto auto auto; gap: 5px;">
-    <?php if ($result->num_rows > 0): ?>
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="card-order-detail">
-                <p><strong>Tanggal Pesanan:</strong> <?= date('d/m/Y', strtotime($row['tanggal_pesanan'])) ?></p>
-                <p><strong>Alamat:</strong> <?= htmlspecialchars($row['alamat_tujuan']) ?></p>
-                <p><strong>Metode Pembayaran:</strong> <?= htmlspecialchars($row['nama_metode']) ?></p>
-                <p><strong>Nama Pesanan:</strong> <?= htmlspecialchars($row['nama_produk']) ?> (<?= $row['quantity'] ?>)</p>
-                <p><strong style="color: red;">Total:</strong> Rp<?= number_format($row['total'], 0, ',', '.') ?></p>
-                <p><strong>Status Pesanan:</strong> <?= htmlspecialchars($row['status']) ?></p>
-                <a href="http://localhost/app_dessert/frontend/assets/<?= htmlspecialchars($row['bukti_pembayaran']) ?>" class="bukti-transfer-link">Lihat bukti transfer</a>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>Anda belum memiliki pesanan.</p>
-        <a href="http://localhost/app_dessert/frontend/pages/produk/produk.php" class="show-product-btn">Show Product</a>
-    <?php endif; ?>
-    </div>
-</section>
+        <div style="display: grid; grid-template-columns: auto auto auto; gap: 5px;">
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="card-order-detail">
+                    <p><strong>Tanggal Pesanan:</strong> <?= date('d/m/Y', strtotime($row['tanggal_pesanan'])) ?></p>
+                    <p><strong>Alamat:</strong> <?= htmlspecialchars($row['alamat_tujuan']) ?></p>
+                    <p><strong>Metode Pembayaran:</strong> <?= htmlspecialchars($row['nama_metode']) ?></p>
+                    <p><strong>Nama Pesanan:</strong> <?= htmlspecialchars($row['nama_produk']) ?> (<?= $row['quantity'] ?>)</p>
+                    
+                    <?php
+                        $ongkir = 8000;
+                        $total_final = $row['total_keranjang']; // Jika total di DB sudah termasuk ongkir, hapus $ongkir
+                    ?>
+                    <p><strong style="color: red;">Total:</strong> Rp<?= number_format($total_final, 0, ',', '.') ?></p>
+                    <p><strong>Status Pesanan:</strong> <?= htmlspecialchars($row['status']) ?></p>
+                    <a href="http://localhost/app_dessert/frontend/assets/<?= htmlspecialchars($row['bukti_pembayaran']) ?>" class="bukti-transfer-link">Lihat bukti transfer</a>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p><center>Anda belum memiliki pesanan.</center></p><br>
+            <a href="http://localhost/app_dessert/frontend/pages/produk/produk.php" 
+            class="show-product-btn" 
+            style="display: inline-block; margin-top: 10px; padding: 10px 20px; width: auto; text-align: center;">
+            Show Product
+        </a>
+<?php endif; ?>
 
-
-        <!-- <div class="line">
-            <p>Anda belum memiliki pesanan.</p>
-            <hr>
-        </div><br>
-        <a href="http://localhost/app_dessert/frontend/pages/produk/produk.php" class="show-product-btn">Show Product</a>-->
+        </div>
     </section>
 
 

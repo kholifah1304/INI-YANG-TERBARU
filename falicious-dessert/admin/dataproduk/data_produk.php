@@ -1,3 +1,10 @@
+<?php
+include "../../../koneksi.php";
+
+if (!$koneksi) {
+  die("Koneksi ke database gagal.");
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,53 +20,53 @@
       <input type="text" placeholder="Cari Data..." class="search-input" />
       <a href="form.php" class="input-btn">Input Produk</a>
     </div>
+
     <table>
       <thead>
         <tr>
-          <th>Id Produk</th>
+          <th>ID</th>
+          <th>Gambar</th>
           <th>Nama</th>
           <th>Stok</th>
           <th>Harga</th>
           <th>Kategori</th>
+          <th>Deskripsi</th>
           <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        $produk = [
-          ["Chocolate Lava Crunch", 30, "Rp 65.000,00", "Brownies Cake"],
-          ["Red Velvet Cream Cheese Brownies", 45, "Rp 65.000,00", "Brownies Cake"],
-          ["Honey Date Brownies", 43, "Rp 65.000,00", "Brownies Cake"],
-          ["Matcha Chocolate Brownies", 21, "Rp 65.000,00", "Brownies Cake"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Brownies Cake"],
-          ["Oreo Cream Brownies", 56, "Rp 65.000,00", "Fruit Dessert Box"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Fruit Dessert Box"],
-          ["Oreo Cream Brownies", 56, "Rp 65.000,00", "Fruit Dessert Box"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Fruit Dessert Box"],
-          ["Oreo Cream Brownies", 56, "Rp 65.000,00", "Fruit Dessert Box"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Classic Dessert Box"],
-          ["Oreo Cream Brownies", 56, "Rp 65.000,00", "Classic Dessert Box"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Classic Dessert Box"],
-          ["Oreo Cream Brownies", 56, "Rp 65.000,00", "Classic Dessert Box"],
-          ["Salted Caramel Brownies", 55, "Rp 65.000,00", "Classic Dessert Box"],
-        ];
+        $query = "SELECT p.id_produk, p.foto_produk, p.nama_produk, p.stok, p.harga, p.deskripsi, k.nama_kategori 
+                  FROM produk p 
+                  JOIN kategori k ON p.id_kategori = k.id_kategori";
 
-        foreach ($produk as $id => $item) {
-          echo "<tr>
-                  <td>{$id}</td>
-                  <td>{$item[0]}</td>
-                  <td>{$item[1]}</td>
-                  <td>{$item[2]}</td>
-                  <td>{$item[3]}</td>
-                  <td>
-                    <a href='edit.php?id={$id}' class='edit'>Edit</a>
-                    <a href='index.php?id={$id}' class='delete' onclick='return confirm(\"Yakin ingin menghapus produk ini?\")'>Delete</a>
-                  </td>
-                </tr>";
+        $result = $koneksi->query($query);
+
+        if ($result && $result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+        ?>
+            <tr>
+              <td><?= $row['id_produk'] ?></td>
+              <td><img src="../uploads/<?= $row['foto_produk'] ?>" alt="Gambar Produk" width="60"></td>
+              <td><?= htmlspecialchars($row['nama_produk']) ?></td>
+              <td><?= $row['stok'] ?></td>
+              <td>Rp <?= number_format($row['harga'], 0, ',', '.') ?></td>
+              <td><?= $row['nama_kategori'] ?></td>
+              <td><?= htmlspecialchars($row['deskripsi']) ?></td>
+              <td>
+                <a href="../editproduk/edit_produk.php?id=<?= $row['id_produk'] ?>" class="edit">Edit</a>
+                <a href="../deleteproduk/delete.php?id=<?= $row['id_produk'] ?>" class="delete" onclick="return confirm('Yakin ingin menghapus produk ini?')">Delete</a>
+              </td>
+            </tr>
+        <?php
+          }
+        } else {
+          echo "<tr><td colspan='8'>Tidak ada data produk.</td></tr>";
         }
         ?>
       </tbody>
     </table>
+
     <button class="back-btn" onclick="history.back()">Back</button>
   </div>
 </body>
