@@ -1,5 +1,5 @@
 <?php
-include "../../koneksi.php"; 
+include "../koneksi.php"; 
 
 // Helper untuk debug query
 function cekQuery($result, $koneksi) {

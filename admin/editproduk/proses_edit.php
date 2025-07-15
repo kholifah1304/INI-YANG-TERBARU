@@ -1,5 +1,5 @@
 <?php
-include "../../../koneksi.php";
+include "../../koneksi.php";
 
 if (!$koneksi) {
     die("Koneksi ke database gagal: " . mysqli_connect_error());

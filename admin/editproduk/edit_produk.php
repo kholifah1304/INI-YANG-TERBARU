@@ -1,5 +1,5 @@
 <?php
-include '../../../koneksi.php';
+include '../../koneksi.php';
 
 if (!isset($_GET['id'])) {
     header("Location: ../dataproduk/data_produk.php");

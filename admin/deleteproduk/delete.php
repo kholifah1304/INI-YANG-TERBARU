@@ -1,5 +1,5 @@
 <?php
-include "../../../koneksi.php"; // Pastikan koneksi database disertakan
+include "../../koneksi.php"; // Pastikan koneksi database disertakan
 
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());

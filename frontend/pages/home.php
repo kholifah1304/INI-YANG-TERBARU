@@ -10,7 +10,7 @@
 
     
 // Ambil produk best seller dari database
-$query = "SELECT * FROM produk ORDER BY id_produk LIMIT 4"; // Anda bisa sesuaikan dengan kriteria best seller
+$query = "SELECT * FROM produk ORDER BY id_produk LIMIT 3"; // Anda bisa sesuaikan dengan kriteria best seller
 $result = mysqli_query($koneksi, $query);
 ?>
 
@@ -108,11 +108,11 @@ $result = mysqli_query($koneksi, $query);
         </div>
     </section>
 
-    <!-- <div class="line">
+    <div class="line">
         <p>PESAN</p>
         <hr>
-    </div> -->
-<!-- 
+    </div>
+
     <section class="contact-form">
         <img src="http://localhost/app_dessert/frontend/assets/stobeligrape.png" class="fruit top-left" alt="">
         <img src="http://localhost/app_dessert/frontend/assets/mango.png" class="fruit bottom-right" alt="">
@@ -131,7 +131,7 @@ $result = mysqli_query($koneksi, $query);
 
             <button type="submit">Kirim Pesan</button>
         </form>
-    </section> -->
+    </section>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -49,7 +49,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DETAIL PRODUK - <?= htmlspecialchars($product['nama_produk']) ?></title>
-    <link rel="stylesheet" href="http://localhost/app_dessert/frontend/assets/style.css">
+    <link rel="stylesheet" href="http://localhost/app_dessert/frontend/assets/detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
 </head>
@@ -116,7 +116,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
                         <a href="http://localhost/app_dessert/frontend/pages/order/pemesanan.php?product_id=<?= $product['id_produk'] ?>&quantity=1" id="buy-now-button">
         <button class="buy-now">Buy Now</button>
     </a>
-    
+
                 </div>
             </div>
         </div>
@@ -128,10 +128,7 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
             <hr>
         </div>
     </main>
-
-    <div class="products-wrapper">
-        <button class="geser-kiri">←</button>
-
+    
         <div class="products-container">
             <?php foreach ($related_products as $related): ?>
             <div class="product-card">
@@ -144,9 +141,6 @@ $related_products = $stmt_related->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
             <?php endforeach; ?>
         </div>
-
-        <button class="geser-kanan">→</button>
-    </div>
 
     <!-- <script>
           document.querySelector('.qty-minus').addEventListener('click', function() {
